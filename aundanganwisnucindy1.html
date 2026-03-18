@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:#fff;
+  color:#333;
+  scroll-behavior:smooth;
+}
+
+h1,h2,h3 {
+  font-family:'Playfair Display', serif;
+}
+
+section {
+  padding:60px 20px;
+  text-align:center;
+}
+
+/* OPENING */
+#opening {
+  height:100vh;
+  background:url('https://images.unsplash.com/photo-1519741497674-611481863552') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+#opening button {
+  padding:10px 20px;
+  background:gold;
+  border:none;
+  cursor:pointer;
+}
+
+/* MEMPELAI */
+.profile {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.profile img {
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+/* COUNTDOWN */
+#countdown {
+  font-size:20px;
+  margin-top:10px;
+}
+
+/* GALERI */
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+}
+
+.gallery img {
+  width:100%;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.gallery img:hover {
+  transform:scale(1.05);
+}
+
+/* TIMELINE */
+.timeline {
+  max-width:600px;
+  margin:auto;
+  text-align:left;
+}
+
+/* RSVP */
+input, textarea {
+  width:80%;
+  padding:10px;
+  margin:5px;
+}
+
+button {
+  margin-top:10px;
+}
+
+/* FADE ANIMATION */
+.fade {
+  opacity:0;
+  transform:translateY(20px);
+  transition:1s;
+}
+
+.fade.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MUSIC BUTTON */
+#musicBtn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:gold;
+  border:none;
+  padding:10px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- OPENING -->
+<div id="opening">
+  <h1>The Wedding of</h1>
+  <h2>Wisnu & Cindy</h2>
+  <button onclick="openInvite()">Buka Undangan</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="lagu1.mp3">
+</audio>
+<button id="musicBtn" onclick="toggleMusic()">🔊</button>
+
+<!-- MEMPELAI -->
+<section class="fade">
+  <h2>Mempelai</h2>
+  <div class="profile">
+    <div>
+      <img src="wisnu1.jpg">
+      <h3>Wisnu</h3>
+      <p>Putra dari Bapak Alm.Soponyono & Ibu muniah</p>
+    </div>
+    <div>
+      <img src="cindy1.jpg">
+      <h3>Cindy</h3>
+      <p>Putri dari Bapak Haris & Ibu Siti</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACARA -->
+<section class="fade">
+  <h2>Save The Date</h2>
+  <p>Minggu, 25 oktober 2030 - 10:00 WIB</p>
+  <div id="COUNTDOWN"></div>
+</section>
+
+<!-- LOKASI -->
+<section class="fade">
+  <h2>Lokasi</h2>
+  <p>convention hall keputih</p>
+  <p>Jl. keputih tegal</p>
+  <a href="https://maps.app.goo.gl/s1mQE9UgpjropnnF7" target="_blank">
+    <button>Lihat Maps</button>
+  </a>
+</section>
+
+<!-- GALERI -->
+<section class="fade">
+  <h2>Galeri</h2>
+  <div class="gallery">
+    <img src="galery1.jpg">
+    <img src="galery2.jpg">
+    <img src="galery5.jpg">
+    <img src="galery3.jpg">
+  </div>
+</section>
+
+<!-- LOVE STORY -->
+<section class="fade">
+  <h2>Love Story</h2>
+  <div class="timeline">
+    <p><b>2024</b> - Pertama bertemu</p>
+    <p><b>2024</b> - Mulai berpacaran</p>
+    <p><b>2030</b> - Menikah ❤️</p>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="fade">
+  <h2>Ucapan</h2>
+  <input type="text" id="name" placeholder="Nama"><br>
+  <textarea id="message" placeholder="Ucapan"></textarea><br>
+  <button onclick="addMessage()">Kirim</button>
+
+  <div id="messages"></div>
+</section>
+
+<!-- SHARE -->
+<section class="fade">
+  <h2>Bagikan</h2>
+  <a href="https://wa.me/?text=Undangan%20Pernikahan%20Rama%20%26%20Sinta" target="_blank">
+    <button>Share WhatsApp</button>
+  </a>
+</section>
+<!-- DONASI / AMplop Digital -->
+<section class="fade">
+  <h2>Amplop Digital</h2>
+  <p>Doa restu Anda adalah hadiah terbaik bagi kami. Namun jika ingin berbagi kebahagiaan, dapat melalui:</p>
+
+  <div style="background:#f9f9f9; padding:20px; border-radius:10px; max-width:400px; margin:auto;">
+    
+    <h3>Bank BCA</h3>
+    <p id="rek">5064016600</p>
+    <p>a.n Muhammad wisnu wardana</p>
+    <button onclick="copyRek()">Salin No Rekening</button>
+
+  </div>
+</section>
+<!-- FOOTER -->
+<section>
+  <p>Terima kasih atas doa dan kehadirannya</p>
+</section>
+
+<script>
+
+// OPEN INVITE
+function openInvite(){
+  document.getElementById('opening').style.display='none';
+  document.getElementById('music').play();
+}
+
+// MUSIC
+function toggleMusic(){
+  let music = document.getElementById('music');
+  if(music.paused){
+    music.play();
+  } else {
+    music.pause();
+  }
+}
+
+// COUNTDOWN
+let targetDate = new Date("Dec 20, 2026 10:00:00").getTime();
+
+setInterval(()=>{
+  let now = new Date().getTime();
+  let diff = targetDate - now;
+
+  let d = Math.floor(diff/(1000*60*60*24));
+  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((diff%(1000*60*60))/(1000*60));
+  let s = Math.floor((diff%(1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+  d+" Hari "+h+" Jam "+m+" Menit "+s+" Detik";
+},1000);
+
+// RSVP
+function addMessage(){
+  let name = document.getElementById("name").value;
+  let msg = document.getElementById("message").value;
+
+  let div = document.createElement("p");
+  div.innerHTML = "<b>"+name+"</b>: "+msg;
+
+  document.getElementById("messages").appendChild(div);
+}
+
+// FADE SCROLL
+const fades = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', ()=>{
+  fades.forEach(el=>{
+    let pos = el.getBoundingClientRect().top;
+    if(pos < window.innerHeight){
+      el.classList.add('show');
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>
